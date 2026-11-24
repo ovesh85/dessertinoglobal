@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dessertino – Shakes &amp; More | Celebrate Every Moment</title>
+<meta name="description" content="Dessertino – Shakes & More. 70+ thick shakes, 24+ ice creams, Swiss waffles, pizzas and more. Zero ice crystals, natural ingredients, R&D in Italy.">
+<meta name="theme-color" content="#DC2281">
+<link rel="icon" href="assets/img/favicon.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Fraunces:ital,opsz,wght@1,9..144,500;1,9..144,700&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/img/hero-shakes.webp">
+<script>document.documentElement.classList.add('js')</script>
+<link rel="stylesheet" href="css/lenis.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="is-loading">
+
+<!-- ============ PRELOADER ============ -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader__rings"><span></span><span></span><span></span></div>
+  <img class="loader__bit lb1" src="assets/img/strawberry.webp" alt="">
+  <img class="loader__bit lb2" src="assets/img/leaves.webp" alt="">
+  <img class="loader__bit lb3" src="assets/img/choco.webp" alt="">
+  <div class="loader__inner">
+    <div class="loader__badge"><img class="loader__logo" src="assets/img/logo-stacked.webp" alt="" width="760" height="760"></div>
+    <p class="loader__tag">Whipping up something sweet<span class="dots"><i>.</i><i>.</i><i>.</i></span></p>
+    <div class="loader__bar"><span id="loaderBar"></span></div>
+    <div class="loader__count"><span id="loaderCount">0</span>%</div>
+  </div>
+  <div class="loader__burst" id="loaderBurst"></div>
+</div>
+
+<div class="cursor" id="cursor" aria-hidden="true"><span class="cursor__label" id="cursorLabel"></span></div>
+<div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+<!-- ============ TOP BAR + NAV ============ -->
+<header class="header" id="header">
+  <div class="topbar">
+    <span>Become a Franchise partner.</span>
+    <a href="#">Join Us <i>→</i></a>
+  </div>
+  <nav class="nav">
+    <a class="nav__logo" href="#" aria-label="Dessertino home">
+      <img src="assets/img/logo.webp" alt="Dessertino – Shakes and More" width="317" height="126">
+    </a>
+    <ul class="nav__links">
+      <li><a href="#" class="is-active">Home</a></li>
+      <li><a href="#">Our Story</a></li>
+      <li><a href="#">Menu</a></li>
+      <li><a href="#">Franchise</a></li>
+      <li><a href="#">Stores</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+    <a href="#order" class="btn btn--pink nav__cta" data-magnetic><span>Order Now</span></a>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+  </nav>
+</header>
+
+<div class="mmenu" id="mmenu">
+  <ul>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Our Story</a></li>
+    <li><a href="#">Menu</a></li>
+    <li><a href="#">Franchise</a></li>
+    <li><a href="#">Stores</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+  <a href="#order" class="btn btn--white mmenu__cta">Order Now</a>
+</div>
+
+<main>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="hero__bg">
+    <div class="blob blob--1"></div><div class="blob blob--2"></div><div class="blob blob--3"></div>
+    <div class="hero__word" aria-hidden="true">DESSERTINO</div>
+  </div>
+
+  <div class="hero__grid wrap">
+    <div class="hero__copy">
+      <p class="eyebrow hero__eyebrow"><span class="dot"></span> Shakes &amp; More · 13+ Years</p>
+      <h1 class="hero__title">
+        <span class="line"><span class="w">Celebrate</span></span>
+        <span class="line"><span class="w">Every</span> <span class="w script">Moment</span></span>
+        <span class="line"><span class="w">with</span> <span class="w hl">Dessertino</span></span>
+      </h1>
+      <div class="hero__rotator" aria-live="polite">
+        <span class="rot is-on">Savor Life’s Sweetest Chapters</span>
+        <span class="rot">Where Sweet Memories Begin</span>
+        <span class="rot">Zero Ice Cream. Zero Ice Crystals.</span>
+      </div>
+      <div class="hero__ctas">
+        <a href="#kitkat" class="btn btn--white" data-magnetic><span>Taste the Signature</span><i class="arr">↓</i></a>
+        <a href="#" class="btn btn--ghost" data-magnetic><span>View Menu</span></a>
+      </div>
+      <div class="hero__chips">
+        <div class="chip"><b>4.5</b><span>★★★★★<small>Rated Customer Satisfaction</small></span></div>
+        <div class="chip chip--cyan"><b>70+</b><span>Thick Shakes<small>on the menu</small></span></div>
+      </div>
+    </div>
+
+    <div class="hero__visual" id="heroVisual">
+      <div class="hero__ring"></div>
+      <div class="hero__disc"></div>
+      <img class="hero__img hero__img--main" src="assets/img/hero-shakes.webp" alt="Dessertino thick shakes with strawberries" width="540" height="540" fetchpriority="high">
+      <img class="float f1" data-depth="0.6" src="assets/img/strawberry.webp" alt="" aria-hidden="true">
+      <img class="float f2" data-depth="1.1" src="assets/img/leaves.webp" alt="" aria-hidden="true">
+      <img class="float f3" data-depth="0.9" src="assets/img/choco.webp" alt="" aria-hidden="true">
+      <div class="badge-spin" aria-hidden="true">
+        <svg viewBox="0 0 200 200"><defs><path id="circ" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs>
+          <text><textPath href="#circ">NO CHEMICALS · ONLY NATURALS · R&amp;D IN ITALY · </textPath></text></svg>
+        <img src="assets/img/favicon.webp" alt="">
+      </div>
+    </div>
+  </div>
+
+  <a href="#marquee" class="scroll-cue" aria-label="Scroll down"><span>Scroll</span><i></i></a>
+  <svg class="hero__wave" viewBox="0 0 1440 140" preserveAspectRatio="none" aria-hidden="true"><path d="M0,80 C240,140 480,20 720,60 C960,100 1200,140 1440,70 L1440,140 L0,140 Z"/></svg>
+</section>
+
+<!-- ============ MARQUEE ============ -->
+<section class="marquee" id="marquee" aria-label="Our range">
+  <div class="mq mq--cyan"><div class="mq__track" data-dir="-1">
+    <span>Nut Shakes</span><i>✦</i><span>Fruit Shakes</span><i>✦</i><span>Premium Shakes</span><i>✦</i><span>Chocolate Shakes</span><i>✦</i><span>Fresh Fruit Juices</span><i>✦</i><span>Brownie</span><i>✦</i><span>Special Indulgences</span><i>✦</i>
+  </div></div>
+  <div class="mq mq--yellow"><div class="mq__track" data-dir="1">
+    <span>Swiss Waffle</span><i>●</i><span>Falooda</span><i>●</i><span>Ice Creams</span><i>●</i><span>Pizzas</span><i>●</i><span>Italian Starters</span><i>●</i><span>Coffee</span><i>●</i><span>Hot Latte</span><i>●</i>
+  </div></div>
+</section>
+
+<!-- ============ SIGNATURE 1 : KIT KAT ============ -->
+<section class="kk" id="kitkat" aria-label="Signature: Kit Kat Break thick shake">
+  <div class="kk__pin">
+    <div class="kk__glow"></div>
+    <div class="kk__grid" aria-hidden="true"></div>
+    <p class="kk__kicker eyebrow"><span class="dot"></span> Signature No. 01 · Most Loved</p>
+    <h2 class="kk__title" aria-label="Kit Kat Break">
+      <span class="kk__row kk__row--1">KIT KAT</span>
+      <span class="kk__row kk__row--2">BREAK</span>
+    </h2>
+
+    <div class="kk__frame" id="kkFrame">
+      <img src="assets/img/kitkat-cup.webp" alt="Dessertino Kit Kat thick shake with whipped cream and chocolate wafers" width="1620" height="1080">
+      <div class="kk__shade"></div>
+    </div>
+
+    <div class="kk__notes" aria-hidden="true">
+      <div class="note note--r n1"><span class="note__dot"></span><span class="note__line"></span><div><b>Whipped Crown</b><small>Fresh cream &amp; choco sprinkles</small></div></div>
+      <div class="note note--l n2"><div><b>Crunchy Wafer</b><small>Real Kit Kat in every sip</small></div><span class="note__line"></span><span class="note__dot"></span></div>
+      <div class="note note--r n3"><span class="note__dot"></span><span class="note__line"></span><div><b>Thick Shake Base</b><small>Zero ice crystals</small></div></div>
+    </div>
+
+    <div class="kk__badge" aria-hidden="true">
+      <svg viewBox="0 0 200 200"><defs><path id="kkc" d="M100,100 m-80,0 a80,80 0 1,1 160,0 a80,80 0 1,1 -160,0"/></defs>
+        <text><textPath href="#kkc">MOST LOVED · THICK SHAKE · KIT KAT BREAK · </textPath></text></svg>
+      <b>01</b>
+    </div>
+    <div class="kk__hint" aria-hidden="true"><span>Scroll to unwrap</span><i></i></div>
+
+    <div class="kk__bits" aria-hidden="true">
+      <div class="bit"><img src="assets/img/choco.webp" alt=""></div><div class="bit"><img src="assets/img/choco.webp" alt=""></div>
+      <div class="bit"><img src="assets/img/choco.webp" alt=""></div><div class="bit"><img src="assets/img/choco.webp" alt=""></div>
+    </div>
+
+    <div class="kk__info">
+      <p class="eyebrow eyebrow--pink">Thick Shake · Crowd Favourite</p>
+      <h3>Kit Kat <em>Break</em></h3>
+      <p>Crunchy chocolate wafer blended into our signature thick shake — made with our own concentrates, proprietary milk-thickening technology and a whipped crown on top.</p>
+      <ul class="kk__tags">
+        <li>Zero Ice Crystals</li><li>Ready in &lt; 1 minute</li><li>Natural Ingredients</li>
+      </ul>
+      <div class="kk__ctas">
+        <a href="#order" class="btn btn--pink" data-magnetic><span>Order Kit Kat Break</span></a>
+        <a href="#menu" class="link-ul">See all thick shakes →</a>
+      </div>
+    </div>
+
+    <div class="kk__cards">
+      <figure class="pcard pcard--1"><img src="assets/img/kitkat-bottle.webp" alt="Kit Kat Break shake in a Dessertino bottle" width="1400" height="933"><figcaption>Bottled to go</figcaption></figure>
+      <figure class="pcard pcard--2"><img src="assets/img/kitkat-waffle.webp" alt="Kit Kat Swiss waffle" width="1400" height="933"><figcaption>Kit Break Waffle</figcaption></figure>
+    </div>
+
+    <div class="kk__meter" aria-hidden="true"><span id="kkMeter"></span></div>
+  </div>
+</section>
+
+<!-- ============ SIGNATURE 2 : ICE CREAM ============ -->
+<section class="ic" id="icecream" aria-label="Signature: hand-scooped ice creams">
+  <div class="ic__pin" id="icPin">
+    <div class="ic__track" id="icTrack">
+
+      <article class="ic__intro">
+        <p class="eyebrow"><span class="dot"></span> Signature No. 02 · Ice Creams</p>
+        <h2>Hand-scooped<br><em>happiness.</em></h2>
+        <p class="lead">Shake it to the next level with hand-scooped premium ice cream, vanilla, real milk and whipped topping.</p>
+        <div class="ic__count"><b data-count="24">0</b><span>+<br>Ice Creams</span></div>
+        <div class="ic__hint"><span>Keep scrolling</span><i>⟶</i></div>
+      </article>
+
+      <article class="ic__slide" data-bg="#4C121B" data-accent="#FF7AAE">
+        <div class="ic__num">01</div>
+        <div class="ic__name" aria-hidden="true">ROSE PETAL</div>
+        <div class="ic__img"><img src="assets/img/ic-rose.webp" alt="Rose Petal ice cream in a Dessertino cup" width="1400" height="933"></div>
+        <div class="ic__txt"><h3>Rose Petal</h3><p>Fragrant, blush-pink and silky — a floral classic scooped high.</p></div>
+      </article>
+
+      <article class="ic__slide" data-bg="#1B5877" data-accent="#7FE0FF">
+        <div class="ic__num">02</div>
+        <div class="ic__name" aria-hidden="true">RAJWADI KULFI</div>
+        <div class="ic__img"><img src="assets/img/ic-kulfi.webp" alt="Rajwadi Kulfi ice cream topped with dry fruits" width="1400" height="933"></div>
+        <div class="ic__txt"><h3>Rajwadi Kulfi</h3><p>A royal, dry-fruit loaded kulfi crowned with cashew and almond.</p></div>
+      </article>
+
+      <article class="ic__slide" data-bg="#2E6547" data-accent="#B8F5B0">
+        <div class="ic__num">03</div>
+        <div class="ic__name" aria-hidden="true">FRESH SITAFAL</div>
+        <div class="ic__img"><img src="assets/img/ic-sitafal.webp" alt="Fresh Sitafal custard apple ice cream" width="1400" height="933"></div>
+        <div class="ic__txt"><h3>Fresh Sitafal</h3><p>Creamy custard-apple goodness, made with real fruit.</p></div>
+      </article>
+
+      <article class="ic__slide" data-bg="#B9A81E" data-accent="#4A1630" data-fg="#2A0E1E">
+        <div class="ic__num">04</div>
+        <div class="ic__name" aria-hidden="true">ROASTED ALMOND</div>
+        <div class="ic__img"><img src="assets/img/ic-almond.webp" alt="Roasted Almond ice cream" width="1400" height="933"></div>
+        <div class="ic__txt"><h3>Roasted Almond</h3><p>Toasty, nutty and buttery with crunchy almond flakes.</p></div>
+      </article>
+
+      <article class="ic__slide" data-bg="#C0C19E" data-accent="#DC2281" data-fg="#2A0E1E">
+        <div class="ic__num">05</div>
+        <div class="ic__name" aria-hidden="true">MOCHA BROWNIE</div>
+        <div class="ic__img"><img src="assets/img/ic-mocha.webp" alt="Mocha Brownie Fudge ice cream" width="1400" height="933"></div>
+        <div class="ic__txt"><h3>Mocha Brownie Fudge</h3><p>Coffee-kissed chocolate with fudgy brownie in every spoon.</p></div>
+      </article>
+
+      <article class="ic__outro">
+        <img src="assets/img/icon-zero.webp" alt="" width="185" height="279">
+        <h3>Zero Ice Cream.<br>Zero Ice Crystals.</h3>
+        <a href="#" class="btn btn--white" data-magnetic><span>Explore all 24+</span></a>
+      </article>
+    </div>
+    <div class="ic__progress"><span id="icBar"></span></div>
+  </div>
+</section>
+
+<!-- ============ SIGNATURE 3 : BUILD YOUR CUP (scroll-filled) ============ -->
+<section class="bc" id="build" aria-label="Build your cup, scoop by scoop">
+  <div class="bc__pin" id="bcPin">
+    <div class="bc__bg" id="bcBg"></div>
+    <div class="bc__words" aria-hidden="true">
+      <span class="bc__word is-0">SCOOP</span><span class="bc__word">ROSE</span><span class="bc__word">MOCHA</span><span class="bc__word">KULFI</span><span class="bc__word">YUM!</span>
+    </div>
+
+    <div class="bc__head">
+      <p class="eyebrow"><span class="dot"></span> Signature No. 03 · Scoop Bar</p>
+      <h2>Build your cup,<br><em>scoop by scoop.</em></h2>
+      <p class="lead">Hand-scooped, layered high and crowned with toppings — just the way you like it.</p>
+    </div>
+
+    <ol class="bc__steps" aria-hidden="true">
+      <li class="bc__step"><i style="--c:#F7A1BE"></i><span>01</span><b>Rose Petal</b></li>
+      <li class="bc__step"><i style="--c:#6B3B22"></i><span>02</span><b>Mocha Brownie Fudge</b></li>
+      <li class="bc__step"><i style="--c:#F1C76A"></i><span>03</span><b>Rajwadi Kulfi</b></li>
+      <li class="bc__step"><i style="--c:#DC2281"></i><span>04</span><b>Toppings &amp; Serve</b></li>
+    </ol>
+
+    <div class="bc__stage" id="bcStage">
+      <div class="bc__shadow"></div>
+      <img class="bc__cupback" src="assets/img/build-cup.webp" alt="Dessertino ice cream cup" width="1060" height="1094">
+      <img class="bc__ball b1" src="assets/img/ball-rose.webp" alt="Rose Petal scoop" width="633" height="640">
+      <img class="bc__ball b2" src="assets/img/ball-mocha.webp" alt="Mocha Brownie Fudge scoop" width="619" height="640">
+      <img class="bc__ball b3" src="assets/img/ball-kulfi.webp" alt="Rajwadi Kulfi scoop" width="597" height="640">
+      <img class="bc__cupfront" src="assets/img/build-cup-front.webp" alt="" width="1060" height="1094" aria-hidden="true">
+      <img class="bc__tool" id="bcTool" src="assets/img/scooper.webp" alt="" width="900" height="257" aria-hidden="true">
+      <div class="bc__splash" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="bc__tops" aria-hidden="true">
+        <img src="assets/img/choco.webp" class="tp tp1" alt=""><img src="assets/img/strawberry.webp" class="tp tp2" alt="">
+        <img src="assets/img/choco.webp" class="tp tp3" alt=""><img src="assets/img/leaves.webp" class="tp tp4" alt="">
+      </div>
+      <div class="bc__tags" aria-hidden="true">
+        <span class="bc__tag t1">Rose Petal</span><span class="bc__tag t2">Mocha Brownie</span><span class="bc__tag t3">Rajwadi Kulfi</span>
+      </div>
+    </div>
+
+    <div class="bc__done">
+      <div class="bc__ring"><svg viewBox="0 0 200 200"><defs><path id="bcc" d="M100,100 m-80,0 a80,80 0 1,1 160,0 a80,80 0 1,1 -160,0"/></defs><text><textPath href="#bcc">24+ FLAVOURS · ZERO ICE CRYSTALS · </textPath></text></svg><b>3</b><small>scoops</small></div>
+      <h3>Your cup is <em>ready!</em></h3>
+      <a href="#order" class="btn btn--white" data-magnetic><span>Order your scoops</span><i class="arr">→</i></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY ============ -->
+<section class="why" id="story">
+  <div class="wrap">
+    <div class="why__head">
+      <h2 class="h2 reveal-up">Why Dessertino
+        <span class="why__rot" id="whyRot"><span>Lip Smacking?</span><span>Tasty?</span><span>Indulging?</span><span>Irresistible?</span></span>
+      </h2>
+      <p class="lead reveal-up">Using our Own Concentrates. <b>No Chemicals, Only Naturals.</b></p>
+    </div>
+
+    <div class="bento">
+      <div class="tile t-pink big reveal-tile"><img src="assets/img/icon-zero.webp" alt="" class="tile__icon"><div><h3>Zero Ice Cream<br>Zero Ice Crystals</h3><p style="margin-top:12px">Globally recognized dispensing technology.</p></div></div>
+      <div class="tile t-cyan reveal-tile"><b class="stat"><span data-count="75">0</span>%</b><p>Occupancy of the online dessert market</p></div>
+      <div class="tile t-yellow reveal-tile"><b class="stat">Italy</b><p>R &amp; D Center at Italy, Europe</p></div>
+      <div class="tile t-white reveal-tile"><img src="assets/img/icon-machine.webp" alt="" class="tile__icon sm"><h4>One Shake is prepared in less than a minute</h4></div>
+      <div class="tile t-purple reveal-tile"><b class="stat"><span data-count="85">0</span>%</b><p>Customers repetitions</p></div>
+      <div class="tile t-white reveal-tile"><img src="assets/img/icon-partner.webp" alt="" class="tile__icon sm"><h4>Customers turned as Business Partners</h4></div>
+      <div class="tile t-cyan reveal-tile"><b class="stat"><span data-count="25">0</span>+</b><p>Diverse locations of supply chain experience</p></div>
+      <div class="tile t-white reveal-tile"><img src="assets/img/icon-process.webp" alt="" class="tile__icon sm"><h4>Imported Technology coupled with customized machines</h4></div>
+      <div class="tile t-white reveal-tile"><img src="assets/img/icon-kitchen.webp" alt="" class="tile__icon sm"><h4>All Supplies from Central Kitchen</h4></div>
+      <div class="tile t-pink wide reveal-tile"><b class="stat"><span data-count="13">0</span>+</b><p>Years of Franchise Experience — growing with partners across India &amp; Dubai.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RANGE ============ -->
+<section class="range">
+  <div class="wrap">
+    <h2 class="h2 center reveal-up">We cover all range of desserts<br><em>for your food cravings</em></h2>
+    <div class="range__grid">
+      <div class="rbub" style="--c:#DC2281"><b data-count="70">0</b><i>+</i><span>Thick Shakes</span></div>
+      <div class="rbub" style="--c:#19A9E0"><b data-count="19">0</b><i>+</i><span>Milk Shakes</span></div>
+      <div class="rbub" style="--c:#FF8A00"><b data-count="24">0</b><i>+</i><span>Ice Creams</span></div>
+      <div class="rbub" style="--c:#8B3FD9"><b data-count="10">0</b><i>+</i><span>Waffles</span></div>
+      <div class="rbub" style="--c:#E8352E"><b data-count="30">0</b><i>+</i><span>Pizzas</span></div>
+      <div class="rbub" style="--c:#12A36B"><b data-count="25">0</b><i>+</i><span>Italian Starters</span></div>
+      <div class="rbub" style="--c:#7A4B2A"><b data-count="10">0</b><i>+</i><span>Coffee</span></div>
+      <div class="rbub" style="--c:#F0509A"><b data-count="7">0</b><i>+</i><span>Hot Latte</span></div>
+    </div>
+    <div class="rating reveal-up"><b>4.5</b><span>★★★★★</span><small>Rated Customer Satisfaction</small></div>
+  </div>
+</section>
+
+<!-- ============ UNIQUE ============ -->
+<section class="uniq">
+  <div class="wrap uniq__grid">
+    <div class="uniq__media">
+      <div class="uniq__img" id="uniqImg"><img src="assets/img/lineup.webp" alt="A lineup of Dessertino shakes" width="1400" height="609" loading="lazy"></div>
+      <div class="uniq__sticker">100%<small>Natural or Nature-identical</small></div>
+    </div>
+    <div class="uniq__copy">
+      <p class="eyebrow eyebrow--pink reveal-up"><span class="dot"></span> Unique yet Tasty</p>
+      <h2 class="h2 reveal-up">Premium ingredients. Unique recipes. <em>Natural taste.</em></h2>
+      <p class="lead reveal-up">Premium Ingredients, unique recipes and natural consistent taste makes Dessertino the Natural choice for desserts.</p>
+      <ol class="feat">
+        <li class="reveal-up"><span>01</span><div><h4>Premium Ingredients, Unmatched Quality</h4><p>We use the finest imported raw materials to craft rich, authentic flavors in every bite.</p></div></li>
+        <li class="reveal-up"><span>02</span><div><h4>Unique Recipes &amp; Preparation</h4><p>The proprietary milk thickening technology along with unique dispensing methodology ensures consistent taste both for dine-in &amp; delivery.</p></div></li>
+        <li class="reveal-up"><span>03</span><div><h4>Natural Ingredients</h4><p>Use of Natural or Natural-identical ingredients making it healthier and tastier.</p></div></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MENU STACK ============ -->
+<section class="menu" id="menu">
+  <div class="wrap">
+    <div class="menu__head">
+      <p class="eyebrow eyebrow--pink reveal-up"><span class="dot"></span> Explore the Menu</p>
+      <h2 class="h2 reveal-up">Something for <em>every craving.</em></h2>
+    </div>
+    <div class="stack">
+      <article class="scard" style="--bg:#DC2281;--fg:#fff">
+        <div class="scard__copy">
+          <span class="scard__no">01 / 04</span>
+          <h3>Thick Shakes</h3>
+          <p>Come home to the best Thickshakes in town. There are innumerable combinations when it comes to making the shake you love. Choose from our menu of tasty and fulfilling delights or customize it to your preference.</p>
+          <div class="scard__regions"><small>Explore Thickshakes in</small><a href="#">Gujarat</a><a href="#">South-India</a></div>
+          <a href="#" class="btn btn--white"><span>View Menu</span></a>
+        </div>
+        <div class="scard__img"><img src="assets/img/oreo-kick.webp" alt="Oreo Kick thick shake" width="1000" height="667" loading="lazy"></div>
+      </article>
+      <article class="scard" style="--bg:#19A9E0;--fg:#fff">
+        <div class="scard__copy">
+          <span class="scard__no">02 / 04</span>
+          <h3>Swiss Waffles</h3>
+          <p>Our delizioso Belgian waffles are home-made using the freshest and best ingredients. Perfectly light and crispy on the outside, and heavenly soft on the inside! Maple syrup is available on request.</p>
+          <div class="scard__regions"><small>Explore Waffles in</small><a href="#">Gujarat</a><a href="#">South-India</a></div>
+          <a href="#" class="btn btn--white"><span>View Menu</span></a>
+        </div>
+        <div class="scard__img"><img src="assets/img/waffle-dark-knight.webp" alt="Dark Knight Swiss waffle" width="1400" height="933" loading="lazy"></div>
+      </article>
+      <article class="scard" style="--bg:#FFC21A;--fg:#2A0E1E">
+        <div class="scard__copy">
+          <span class="scard__no">03 / 04</span>
+          <h3>Milkshakes &amp; Ice Creams</h3>
+          <p>Shake it to the next level with hand-scooped premium ice cream, vanilla, real milk and whipped topping.</p>
+          <div class="scard__regions"><small>Explore in</small><a href="#">South-India</a><a href="#">Gujarat</a></div>
+          <a href="#" class="btn btn--dark"><span>View Menu</span></a>
+        </div>
+        <div class="scard__img"><img src="assets/img/black-currant.webp" alt="Black Currant milkshake bottle" width="1000" height="667" loading="lazy"></div>
+      </article>
+      <article class="scard" style="--bg:#3B1230;--fg:#fff">
+        <div class="scard__copy">
+          <span class="scard__no">04 / 04</span>
+          <h3>Pizzas</h3>
+          <p>Perfect crust and tempting toppings are our speciality.</p>
+          <div class="scard__regions"><small>Explore Pizzas in</small><a href="#">Gujarat</a><a href="#">Dubai</a></div>
+          <a href="#" class="btn btn--pink"><span>View Menu</span></a>
+        </div>
+        <div class="scard__img"><img src="assets/img/pizza-explosive.webp" alt="Explosive pizza" width="1400" height="1050" loading="lazy"></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAVOURITES ============ -->
+<section class="favs" aria-label="Fan favourites">
+  <div class="wrap favs__head">
+    <h2 class="h2 reveal-up">Fan <em>favourites</em></h2>
+    <p class="lead reveal-up">Thick shakes, hot lattes and everything in between. Drag to explore.</p>
+  </div>
+  <div class="favs__rail" id="favRail" data-cursor="Drag">
+    <div class="favs__track" id="favTrack">
+      <figure class="fcard"><img src="assets/img/oreo-kick.webp" alt="" loading="lazy"><figcaption>Oreo Kick</figcaption></figure>
+      <figure class="fcard"><img src="assets/img/pink-berry.webp" alt="" loading="lazy"><figcaption>Pink Berry</figcaption></figure>
+      <figure class="fcard"><img src="assets/img/juicy-strawberry.webp" alt="" loading="lazy"><figcaption>Juicy Strawberry</figcaption></figure>
+      <figure class="fcard"><img src="assets/img/brown-mocha.webp" alt="" loading="lazy"><figcaption>Brown Mocha</figcaption></figure>
+      <figure class="fcard"><img src="assets/img/mango-explosion.webp" alt="" loading="lazy"><figcaption>Mango Explosion</figcaption></figure>
+      <figure class="fcard"><img src="assets/img/hot-biscoff.webp" alt="" loading="lazy"><figcaption>Hot Biscoff</figcaption></figure>
+      <figure class="fcard"><img src="assets/img/chiku.webp" alt="" loading="lazy"><figcaption>Chiku</figcaption></figure>
+      <figure class="fcard"><img src="assets/img/berry-magic.webp" alt="" loading="lazy"><figcaption>Berry Berry Magic</figcaption></figure>
+      <figure class="fcard"><img src="assets/img/latte.webp" alt="" loading="lazy"><figcaption>Latte</figcaption></figure>
+      <figure class="fcard"><img src="assets/img/chilling-chocolate.webp" alt="" loading="lazy"><figcaption>Chilling Chocolate</figcaption></figure>
+      <figure class="fcard"><img src="assets/img/butter-scotch.webp" alt="" loading="lazy"><figcaption>Butter Scotch</figcaption></figure>
+      <figure class="fcard"><img src="assets/img/waffle-caramel.webp" alt="" loading="lazy"><figcaption>Caramel Drops Waffle</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FILM (live-site banner video) ============ -->
+<section class="film" id="film" aria-label="Dessertino film">
+  <div class="film__frame" id="filmFrame" data-cursor="Play">
+    <div class="film__media" id="filmMedia">
+      <img class="film__poster" id="filmPoster" src="assets/img/film-poster.webp" alt="Dessertino shake being dispensed" loading="lazy" width="1280" height="720">
+      <!-- Local video (no YouTube). Replace assets/video/dessertino-film.mp4 with any brand film, same name. -->
+      <video class="film__video" id="filmVideo" muted loop playsinline preload="metadata" poster="assets/img/film-poster.webp"><source src="assets/video/dessertino-film.mp4" type="video/mp4"><source src="assets/video/dessertino-film.webm" type="video/webm"></video>
+    </div>
+    <div class="film__overlay">
+      <p class="eyebrow"><span class="dot dot--live"></span> Straight from our kitchen</p>
+      <h2>Dessertino: Where<br><em>Sweet Memories Begin</em></h2>
+    </div>
+    <button class="film__play" id="filmPlay" aria-label="Watch full screen"><span>▶</span><small>Watch full screen</small></button>
+  </div>
+</section>
+
+<!-- ============ REVIEWS ============ -->
+<section class="reviews">
+  <div class="wrap">
+    <div class="reviews__head">
+      <h2 class="h2 reveal-up">Humans<br><em>Love us.</em></h2>
+      <p class="lead reveal-up">Everyone loves a heartfelt dessert.</p>
+    </div>
+    <div class="reviews__grid">
+      <blockquote class="rev reveal-up">
+        <div class="rev__stars"><b>4.5/5</b> ★★★★★</div>
+        <p>“Amazing place with really different variety of shakes, waffles and more. I like the taste, quantity and their hospitality. I feel this is better than other shake centres. Choose wisely and you'll enjoy more. U will also love the interior as it's suitable for families and friends.”</p>
+        <footer><img src="assets/img/reviewer-jessica.webp" alt="" loading="lazy"><cite>Jessica Grace</cite></footer>
+      </blockquote>
+      <blockquote class="rev rev--pink reveal-up">
+        <div class="rev__stars"><b>4.4/5</b> ★★★★★</div>
+        <p>“The ambiance is super cozy. Coming to the thickshakes… they were literally jaw dropping delicious and the quality of the shakes was awesome. Their branding, packing and the quality of the ingredients they use is absolutely top notch. Best place in Vizag for thickshakes!!!”</p>
+        <footer><img src="assets/img/reviewer-sai.webp" alt="" loading="lazy"><cite>Sai Rahul</cite></footer>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ORDER ============ -->
+<section class="order" id="order">
+  <div class="wrap order__grid">
+    <div class="order__copy">
+      <p class="eyebrow"><span class="dot"></span> Order Now</p>
+      <h2 class="h2">Experience the astonishing &amp; wide selection of desserts</h2>
+      <p class="lead">With natural ingredients and toppings from around the world — delivered to your door or served at a store near you.</p>
+      <div class="tabs" role="tablist">
+        <button class="tab is-on" role="tab" data-tab="india" aria-selected="true">India</button>
+        <button class="tab" role="tab" data-tab="dubai" aria-selected="false">Dubai</button>
+        <span class="tabs__pill"></span>
+      </div>
+      <div class="plats is-on" data-panel="india">
+        <a href="#" class="plat"><img src="assets/img/zomato.webp" alt="Zomato"><span>Order on Zomato →</span></a>
+        <a href="#" class="plat"><img src="assets/img/swiggy.webp" alt="Swiggy"><span>Order on Swiggy →</span></a>
+      </div>
+      <div class="plats" data-panel="dubai">
+        <a href="#" class="plat"><img src="assets/img/deliveroo.webp" alt="Deliveroo"><span>Order on Deliveroo →</span></a>
+        <a href="#" class="plat"><img src="assets/img/talabat.webp" alt="Talabat"><span>Order on Talabat →</span></a>
+      </div>
+    </div>
+    <a class="order__store" href="#" data-cursor="Visit">
+      <img src="assets/img/store.webp" alt="Dessertino Shakes and More store front" loading="lazy" width="1400" height="788">
+      <div><small>Wanna Dine in?</small><h3>Find our Store Nearby →</h3></div>
+    </a>
+  </div>
+</section>
+
+<!-- ============ FRANCHISE CTA ============ -->
+<section class="fr" id="franchise">
+  <div class="fr__inner">
+    <div class="fr__marquee" aria-hidden="true"><div class="fr__mtrack" id="frTrack">FRANCHISE · PARTNER · GROW · FRANCHISE · PARTNER · GROW · </div></div>
+
+    <div class="fr__copy">
+      <p class="eyebrow"><span class="dot"></span> 13+ years of Franchise Experience</p>
+      <h2>Become a <em>Franchise</em> partner.</h2>
+      <p class="lead">Customers turned as Business Partners. Bring the Dessertino experience to your city with a proven model and complete support.</p>
+      <ul class="fr__perks">
+        <li><span><img src="assets/img/icon-process.webp" alt=""></span>Imported technology &amp; customized machines</li>
+        <li><span><img src="assets/img/icon-kitchen.webp" alt=""></span>All supplies from Central Kitchen</li>
+        <li><span><img src="assets/img/icon-machine.webp" alt=""></span>One shake prepared in under a minute</li>
+        <li><span><img src="assets/img/icon-thumb.webp" alt=""></span>R &amp; D Center at Italy, Europe</li>
+      </ul>
+      <div class="fr__ctas">
+        <a href="#" class="btn btn--white btn--xl" data-magnetic><span>Join Us</span><i class="arr">→</i></a>
+        <a href="#" class="fr__round" data-magnetic aria-label="Become a partner">
+          <svg viewBox="0 0 200 200"><defs><path id="frc" d="M100,100 m-72,0 a72,72 0 1,1 144,0 a72,72 0 1,1 -144,0"/></defs>
+            <text><textPath href="#frc">BECOME A PARTNER · JOIN US · </textPath></text></svg>
+          <i>↗</i>
+        </a>
+      </div>
+    </div>
+
+    <div class="fr__orbit" id="frOrbit">
+      <div class="orb__ring r1"></div><div class="orb__ring r2"></div>
+      <div class="orb__core"><img src="assets/img/logo-stacked.webp" alt="Dessertino"></div>
+      <div class="orb__spin s1">
+        <div class="orb__item" style="--a:-90deg"><div class="orb__up stat st-y"><b>13+</b><small>Years</small></div></div>
+        <div class="orb__item" style="--a:30deg"><div class="orb__up stat st-c"><b>25+</b><small>Locations</small></div></div>
+        <div class="orb__item" style="--a:150deg"><div class="orb__up stat st-w"><b>85%</b><small>Repeat</small></div></div>
+      </div>
+      <div class="orb__spin s2">
+        <div class="orb__item o2" style="--a:-30deg"><div class="orb__up pic"><img src="assets/img/kitkat-cup.webp" alt=""></div></div>
+        <div class="orb__item o2" style="--a:90deg"><div class="orb__up pic"><img src="assets/img/ic-rose.webp" alt=""></div></div>
+        <div class="orb__item o2" style="--a:210deg"><div class="orb__up pic"><img src="assets/img/pink-berry.webp" alt=""></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="wrap footer__grid">
+    <div class="footer__brand">
+      <img src="assets/img/logo.webp" alt="Dessertino – Shakes and More" width="317" height="126" loading="lazy">
+      <p>Celebrate Every Moment with Dessertino.</p>
+    </div>
+    <div>
+      <h5>Explore</h5>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Our Story</a></li>
+        <li><a href="#">Franchise</a></li>
+        <li><a href="#">Store</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>More</h5>
+      <ul>
+        <li><a href="#">What's New?</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms &amp; Conditions</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Let's be social?</h5>
+      <div class="socials">
+        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M14 8h3V4h-3c-2.8 0-4 1.7-4 4.3V10H7v4h3v8h4v-8h3l1-4h-4V8.6c0-.4.3-.6.6-.6z"/></svg></a>
+        <a href="#" aria-label="X"><svg viewBox="0 0 24 24"><path d="M17.8 3h3.1l-6.8 7.7L22 21h-6.2l-4.9-6.3L5.3 21H2.2l7.3-8.3L2 3h6.4l4.4 5.8L17.8 3zm-1.1 16.2h1.7L7.4 4.7H5.6l11.1 14.5z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 7.3A4.7 4.7 0 1 0 12 16.7 4.7 4.7 0 0 0 12 7.3zm0 7.7a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm6-7.9a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0zM21 7.4c-.1-1.6-.4-3-1.6-4.2S16.6 1.7 15 1.6C13.4 1.5 10.6 1.5 9 1.6 7.4 1.7 6 2 4.8 3.2S3.1 6 3 7.6c-.1 1.6-.1 6.5 0 8 .1 1.6.4 3 1.6 4.2s2.6 1.5 4.2 1.6c1.6.1 4.4.1 6 0 1.6-.1 3-.4 4.2-1.6s1.5-2.6 1.6-4.2c.1-1.6.1-6.4 0-8.2z"/></svg></a>
+      </div>
+      <h5 class="mt">Support</h5>
+      <p><a href="tel:9924198933">9924198933</a><br><a href="mailto:info@dessertinoglobal.com">info@dessertinoglobal.com</a></p>
+    </div>
+  </div>
+  <div class="footer__word" aria-hidden="true"><span>Dessertino</span></div>
+  <div class="wrap footer__bottom">
+    <span>© 2025 Dessertino. All Rights Reserved.</span>
+  </div>
+</footer>
+
+</main>
+
+<div class="vmodal" id="vmodal" aria-hidden="true">
+  <button class="vmodal__close" id="vclose" aria-label="Close video">✕</button>
+  <div class="vmodal__box" id="vbox"></div>
+</div>
+
+<script src="js/gsap.min.js"></script>
+<script src="js/ScrollTrigger.min.js"></script>
+<script src="js/lenis.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
