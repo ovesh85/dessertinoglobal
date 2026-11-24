@@ -19,9 +19,8 @@ SECTIONS
  1. Preloader (logo + progress)          8. Menu – stacking cards (Thick Shakes, Waffles, Milkshakes & Ice Creams, Pizzas)
  2. Hero (animated headline, parallax)   9. Fan favourites – auto/drag carousel
  3. Range marquee (scroll-velocity)     10. Film – opens the YouTube video from the current home page
- 4. SIGNATURE 1 – Kit Kat Break (pinned scroll story)
+ 4. SIGNATURE 1 – Kit Kat Break making-process film (scroll-scrubbed)
  5. SIGNATURE 2 – Ice Creams (pinned horizontal scroll, colour changes per flavour)
- 5b. SIGNATURE 3 – Build your cup (scoops fill the cup as you scroll)
  6. Why Dessertino – stats bento        11. Reviews   12. Order (India/Dubai tabs)   13. Franchise CTA   14. Footer
  7. Range counters + Unique yet Tasty
 
@@ -33,14 +32,15 @@ VIDEO (Film section)
   source file and save it as assets/video/dessertino-film.mp4 (same name). Delete the .webm
   or replace it too.
 
-BUILD-YOUR-CUP SECTION (Signature No. 03)
-- Pinned scroll animation: a steel ice-cream scooper carries each scoop in, tilts and drops it
-  into a full (uncropped) Dessertino cup - Rose Petal, Mocha Brownie Fudge, Rajwadi Kulfi -
-  with squash/bounce, splash and colour changes; then toppings burst out and the
-  "Your cup is ready" CTA appears.
-- Images: assets/img/build-cup.webp (back) + build-cup-front.webp (front rim layer so scoops
-  sit INSIDE the cup), ball-rose/mocha/kulfi.webp, scooper.webp (premium studio renders made
-  for this page, styled on the Dessertino cup).
+KIT KAT MAKING-PROCESS FILM (Signature No. 01)
+- Pinned scroll section: scrolling plays the making of the Kit Kat Break thick shake frame by
+  frame (dispenser pours the thick shake -> whipped cream crown -> sprinkles + Kit Kat fingers).
+  Scroll back and it rewinds. Frames: assets/frames/kk/f001.webp ... (drawn on a <canvas>,
+  so it is perfectly smooth and works offline / from file://).
+- The film is a photoreal render made for this page, styled on the real Dessertino Kit Kat cup.
+
+ICE CREAM SECTION
+- One wheel/trackpad gesture moves exactly one flavour; touch swipes snap to the next flavour.
 
 LINKS
 - All navigation / CTA / social / delivery links are placeholders (#) for the demo.

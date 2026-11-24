@@ -131,39 +131,30 @@
   </div></div>
 </section>
 
-<!-- ============ SIGNATURE 1 : KIT KAT ============ -->
-<section class="kk" id="kitkat" aria-label="Signature: Kit Kat Break thick shake">
+<!-- ============ SIGNATURE 1 : KIT KAT (scroll making-process film) ============ -->
+<section class="kk" id="kitkat" aria-label="Signature: Kit Kat Break thick shake, made live">
   <div class="kk__pin">
-    <div class="kk__glow"></div>
-    <div class="kk__grid" aria-hidden="true"></div>
-    <p class="kk__kicker eyebrow"><span class="dot"></span> Signature No. 01 · Most Loved</p>
-    <h2 class="kk__title" aria-label="Kit Kat Break">
-      <span class="kk__row kk__row--1">KIT KAT</span>
-      <span class="kk__row kk__row--2">BREAK</span>
-    </h2>
+    <canvas class="kk__canvas" id="kkCanvas" aria-hidden="true"></canvas>
+    <img class="kk__poster" id="kkPoster" src="assets/frames/kk/f001.webp" alt="Dessertino Kit Kat Break thick shake being made" width="1280" height="720">
+    <div class="kk__shade" id="kkShade"></div>
+    <div class="kk__vignette"></div>
 
-    <div class="kk__frame" id="kkFrame">
-      <img src="assets/img/kitkat-cup.webp" alt="Dessertino Kit Kat thick shake with whipped cream and chocolate wafers" width="1620" height="1080">
-      <div class="kk__shade"></div>
+    <div class="kk__intro" id="kkIntro">
+      <p class="eyebrow eyebrow--pink"><span class="dot"></span> Signature No. 01 · Most Loved</p>
+      <h2>Kit Kat<br><em>Break</em></h2>
+      <p class="kk__sub">Our crowd favourite thick shake — watch it being made, live from the dispenser.</p>
+      <div class="kk__hint"><i></i><span>Scroll to make it</span></div>
     </div>
 
-    <div class="kk__notes" aria-hidden="true">
-      <div class="note note--r n1"><span class="note__dot"></span><span class="note__line"></span><div><b>Whipped Crown</b><small>Fresh cream &amp; choco sprinkles</small></div></div>
-      <div class="note note--l n2"><div><b>Crunchy Wafer</b><small>Real Kit Kat in every sip</small></div><span class="note__line"></span><span class="note__dot"></span></div>
-      <div class="note note--r n3"><span class="note__dot"></span><span class="note__line"></span><div><b>Thick Shake Base</b><small>Zero ice crystals</small></div></div>
+    <div class="kk__chapters" aria-hidden="true">
+      <div class="kk__chap"><span>01</span><h4>Dispensed thick</h4><p>Proprietary milk-thickening technology pours a velvety Kit Kat shake — ready in under a minute.</p></div>
+      <div class="kk__chap"><span>02</span><h4>Crowned with cream</h4><p>A tall, glossy whipped-cream swirl, piped fresh on top.</p></div>
+      <div class="kk__chap"><span>03</span><h4>Have a break</h4><p>Chocolate sprinkles and real Kit Kat fingers to finish it off.</p></div>
     </div>
 
-    <div class="kk__badge" aria-hidden="true">
-      <svg viewBox="0 0 200 200"><defs><path id="kkc" d="M100,100 m-80,0 a80,80 0 1,1 160,0 a80,80 0 1,1 -160,0"/></defs>
-        <text><textPath href="#kkc">MOST LOVED · THICK SHAKE · KIT KAT BREAK · </textPath></text></svg>
-      <b>01</b>
-    </div>
-    <div class="kk__hint" aria-hidden="true"><span>Scroll to unwrap</span><i></i></div>
-
-    <div class="kk__bits" aria-hidden="true">
-      <div class="bit"><img src="assets/img/choco.webp" alt=""></div><div class="bit"><img src="assets/img/choco.webp" alt=""></div>
-      <div class="bit"><img src="assets/img/choco.webp" alt=""></div><div class="bit"><img src="assets/img/choco.webp" alt=""></div>
-    </div>
+    <ol class="kk__steps" aria-hidden="true">
+      <li><i></i><b>Dispense</b></li><li><i></i><b>Crown</b></li><li><i></i><b>Break</b></li>
+    </ol>
 
     <div class="kk__info">
       <p class="eyebrow eyebrow--pink">Thick Shake · Crowd Favourite</p>
@@ -182,7 +173,6 @@
       <figure class="pcard pcard--1"><img src="assets/img/kitkat-bottle.webp" alt="Kit Kat Break shake in a Dessertino bottle" width="1400" height="933"><figcaption>Bottled to go</figcaption></figure>
       <figure class="pcard pcard--2"><img src="assets/img/kitkat-waffle.webp" alt="Kit Kat Swiss waffle" width="1400" height="933"><figcaption>Kit Break Waffle</figcaption></figure>
     </div>
-
     <div class="kk__meter" aria-hidden="true"><span id="kkMeter"></span></div>
   </div>
 </section>
@@ -242,53 +232,6 @@
       </article>
     </div>
     <div class="ic__progress"><span id="icBar"></span></div>
-  </div>
-</section>
-
-<!-- ============ SIGNATURE 3 : BUILD YOUR CUP (scroll-filled) ============ -->
-<section class="bc" id="build" aria-label="Build your cup, scoop by scoop">
-  <div class="bc__pin" id="bcPin">
-    <div class="bc__bg" id="bcBg"></div>
-    <div class="bc__words" aria-hidden="true">
-      <span class="bc__word is-0">SCOOP</span><span class="bc__word">ROSE</span><span class="bc__word">MOCHA</span><span class="bc__word">KULFI</span><span class="bc__word">YUM!</span>
-    </div>
-
-    <div class="bc__head">
-      <p class="eyebrow"><span class="dot"></span> Signature No. 03 · Scoop Bar</p>
-      <h2>Build your cup,<br><em>scoop by scoop.</em></h2>
-      <p class="lead">Hand-scooped, layered high and crowned with toppings — just the way you like it.</p>
-    </div>
-
-    <ol class="bc__steps" aria-hidden="true">
-      <li class="bc__step"><i style="--c:#F7A1BE"></i><span>01</span><b>Rose Petal</b></li>
-      <li class="bc__step"><i style="--c:#6B3B22"></i><span>02</span><b>Mocha Brownie Fudge</b></li>
-      <li class="bc__step"><i style="--c:#F1C76A"></i><span>03</span><b>Rajwadi Kulfi</b></li>
-      <li class="bc__step"><i style="--c:#DC2281"></i><span>04</span><b>Toppings &amp; Serve</b></li>
-    </ol>
-
-    <div class="bc__stage" id="bcStage">
-      <div class="bc__shadow"></div>
-      <img class="bc__cupback" src="assets/img/build-cup.webp" alt="Dessertino ice cream cup" width="1060" height="1094">
-      <img class="bc__ball b1" src="assets/img/ball-rose.webp" alt="Rose Petal scoop" width="633" height="640">
-      <img class="bc__ball b2" src="assets/img/ball-mocha.webp" alt="Mocha Brownie Fudge scoop" width="619" height="640">
-      <img class="bc__ball b3" src="assets/img/ball-kulfi.webp" alt="Rajwadi Kulfi scoop" width="597" height="640">
-      <img class="bc__cupfront" src="assets/img/build-cup-front.webp" alt="" width="1060" height="1094" aria-hidden="true">
-      <img class="bc__tool" id="bcTool" src="assets/img/scooper.webp" alt="" width="900" height="257" aria-hidden="true">
-      <div class="bc__splash" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-      <div class="bc__tops" aria-hidden="true">
-        <img src="assets/img/choco.webp" class="tp tp1" alt=""><img src="assets/img/strawberry.webp" class="tp tp2" alt="">
-        <img src="assets/img/choco.webp" class="tp tp3" alt=""><img src="assets/img/leaves.webp" class="tp tp4" alt="">
-      </div>
-      <div class="bc__tags" aria-hidden="true">
-        <span class="bc__tag t1">Rose Petal</span><span class="bc__tag t2">Mocha Brownie</span><span class="bc__tag t3">Rajwadi Kulfi</span>
-      </div>
-    </div>
-
-    <div class="bc__done">
-      <div class="bc__ring"><svg viewBox="0 0 200 200"><defs><path id="bcc" d="M100,100 m-80,0 a80,80 0 1,1 160,0 a80,80 0 1,1 -160,0"/></defs><text><textPath href="#bcc">24+ FLAVOURS · ZERO ICE CRYSTALS · </textPath></text></svg><b>3</b><small>scoops</small></div>
-      <h3>Your cup is <em>ready!</em></h3>
-      <a href="#order" class="btn btn--white" data-magnetic><span>Order your scoops</span><i class="arr">→</i></a>
-    </div>
   </div>
 </section>
 

@@ -170,10 +170,6 @@
   });
 
   if (reduce) {
-    gsap.set(".kk__info > *, .pcard", { opacity: 1 });
-    gsap.set(".kk__frame", { clipPath: "inset(0% 0% 0% 0% round 0px)" });
-    gsap.set(".kk__shade", { opacity: 1 });
-    gsap.set(".kk__title, .kk__notes, .kk__badge, .kk__hint, .kk__bits", { opacity: 0 });
     $$(".reveal-up, .reveal-tile").forEach((e) => (e.style.cssText = "opacity:1;transform:none"));
   }
 
@@ -186,52 +182,74 @@
       .to(".hero__bg .blob", { y: (i) => 120 + i * 60, ease: "none" }, 0);
   }
 
-  /* ---------------- SIGNATURE 1: KIT KAT (pinned, scrubbed) ---------------- */
-  if (!reduce) {
-    const near = () => isMobile()
-      ? [{ x: -34, y: -24, r: -30 }, { x: 33, y: -12, r: 25 }, { x: -36, y: 18, r: 50 }, { x: 30, y: 26, r: -20 }]
-      : [{ x: -17, y: -24, r: -30 }, { x: 15, y: -30, r: 25 }, { x: -18, y: 20, r: 50 }, { x: 17, y: 16, r: -20 }];
-    const startClip = () => isMobile() ? "inset(16% 20% 14% 20% round 999px 999px 32px 32px)" : "inset(9% 38.5% 8% 38.5% round 999px 999px 40px 40px)";
-    const bits = $$(".bit");
-    const placeBits = () => bits.forEach((b, i) => gsap.set(b, { x: near()[i].x * innerWidth / 100, y: near()[i].y * innerHeight / 100, rotate: near()[i].r, scale: 1, opacity: 1 }));
-    placeBits();
+  /* ---------------- SIGNATURE 1: KIT KAT making-process film (canvas image sequence, scroll scrubbed) ---------------- */
+  (() => {
+    const canvas = $("#kkCanvas"); if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    const N = 186, frames = new Array(N);
+    const src = (i) => `assets/frames/kk/f${String(i + 1).padStart(3, "0")}.webp`;
+    let cur = -1, want = 0, dpr = 1;
+    const size = () => {
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.round(canvas.clientWidth * dpr); canvas.height = Math.round(canvas.clientHeight * dpr);
+      cur = -1; draw(want);
+    };
+    const nearestLoaded = (i) => { for (let d = 0; d < N; d++) { if (frames[i - d] && frames[i - d].complete && frames[i - d].naturalWidth) return i - d; if (frames[i + d] && frames[i + d].complete && frames[i + d].naturalWidth) return i + d; } return -1; };
+    function draw(i) {
+      want = i;
+      const k = nearestLoaded(i); if (k < 0 || k === cur) return;
+      const img = frames[k], cw = canvas.width, ch = canvas.height;
+      const s = Math.max(cw / img.naturalWidth, ch / img.naturalHeight);
+      const w = img.naturalWidth * s, h = img.naturalHeight * s;
+      // keep the cup in view on tall screens (cup sits at ~50% x)
+      ctx.drawImage(img, (cw - w) / 2, (ch - h) / 2, w, h);
+      cur = k;
+    }
+    // load: first frame now, the rest progressively (every 8th first, then fill in)
+    const load = (i) => { if (frames[i]) return; const im = new Image(); im.decoding = "async"; im.src = src(i); im.onload = () => { if (Math.abs(i - want) < 6 || cur < 0) draw(want); }; frames[i] = im; };
+    load(0);
+    const order = [];
+    for (let step of [8, 4, 2, 1]) for (let i = 0; i < N; i += step) if (!order.includes(i)) order.push(i);
+    let oi = 0; const pump = () => { for (let n = 0; n < 6 && oi < order.length; n++, oi++) load(order[oi]); if (oi < order.length) setTimeout(pump, 30); };
+    addEventListener("load", () => setTimeout(pump, 300));
+    addEventListener("resize", size); size();
 
-    // intro when section scrolls into view (default state comes alive)
-    const kkIn = gsap.timeline({ paused: true });
-    kkIn.from(".kk__title", { opacity: 0, y: 80, duration: 1.3, ease: "expo.out", clearProps: "transform,opacity" }, 0)
-      .from(".kk__notes", { opacity: 0, duration: 0.8, ease: "power2.out" }, 0.45)
-      .from(".note__line", { scaleX: 0, duration: 0.9, stagger: 0.12, ease: "expo.out" }, 0.5)
-      .from(".kk__badge", { scale: 0, rotate: -90, duration: 1, ease: "back.out(1.6)" }, 0.5)
-      .from(".kk__bits", { opacity: 0, scale: 0.7, duration: 1.4, ease: "expo.out" }, 0.25);
-    ScrollTrigger.create({ trigger: ".kk", start: "top 70%", once: true, onEnter: () => kkIn.play() });
+    if (reduce) { gsap.set(".kk__info > *, .pcard", { opacity: 1 }); gsap.set("#kkIntro", { opacity: 0 }); want = N - 1; pump(); return; }
 
-    gsap.set(".kk__frame", { clipPath: startClip() });
-    const kk = gsap.timeline({
+    const state = { f: 0 };
+    const chaps = $$(".kk__chap"), steps = $$(".kk__steps li");
+    const FILM = 7; // timeline seconds spent scrubbing the film
+    const tl = gsap.timeline({
       defaults: { ease: "none" },
       scrollTrigger: {
-        trigger: ".kk__pin", start: "top top", end: () => "+=" + innerHeight * (isMobile() ? 3.2 : 3.6),
+        trigger: ".kk__pin", start: "top top", end: () => "+=" + innerHeight * (isMobile() ? 4 : 4.6),
         pin: true, scrub: true, anticipatePin: 1, invalidateOnRefresh: true,
-        onUpdate: (s) => gsap.set("#kkMeter", { scaleX: s.progress }),
+        onUpdate: (s) => {
+          gsap.set("#kkMeter", { scaleX: s.progress });
+          const t = tl.time(), idx = t < 0.6 ? -1 : t < 3.0 ? 0 : t < 5.1 ? 1 : 2;
+          steps.forEach((li, i) => li.classList.toggle("is-on", i === idx));
+        },
       },
     });
-    kk.to(".kk__kicker, .kk__hint, .kk__badge", { opacity: 0, y: -20, duration: 1 }, 0)
-      .to(".note", { opacity: 0, x: (i) => (i === 1 ? -60 : 60), duration: 1, stagger: 0.1 }, 0)
-      .to(".kk__row--1", { xPercent: -70, opacity: 0, duration: 4, ease: "power1.in" }, 0)
-      .to(".kk__row--2", { xPercent: 70, opacity: 0, duration: 4, ease: "power1.in" }, 0)
-      .fromTo(".kk__frame", { clipPath: startClip }, { clipPath: "inset(0% 0% 0% 0% round 0px 0px 0px 0px)", duration: 4, ease: "power2.inOut" }, 0)
-      .fromTo(".kk__frame img", { scale: 1.08 }, { scale: 1.0, duration: 4.5, ease: "power2.out" }, 0)
-      .to(".kk__glow", { scale: 1.6, opacity: 0, duration: 4 }, 0);
-    bits.forEach((b, i) => {
-      kk.to(b, { x: () => near()[i].x * innerWidth / 100 * 2.6, y: () => near()[i].y * innerHeight / 100 * 2.6, rotate: () => near()[i].r * 3, scale: 1.4, opacity: 0, duration: 3.4, ease: "power1.in" }, 0.2 + i * 0.1);
+    tl.to(state, { f: N - 1, duration: FILM, ease: "none", onUpdate: () => draw(Math.round(state.f)) }, 0)
+      .to("#kkIntro", { opacity: 0, y: -60, duration: 0.6, ease: "power2.in" }, 0.05)
+      .to("#kkShade", { opacity: 0.35, duration: 0.6 }, 0.1)
+      .to(".kk__steps", { opacity: 1, duration: 0.4 }, 0.5);
+    const chapAt = [0.7, 3.1, 5.2];
+    chaps.forEach((c, i) => {
+      tl.fromTo(c, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, chapAt[i]);
+      if (i < chaps.length - 1) tl.to(c, { opacity: 0, y: -30, duration: 0.35, ease: "power2.in" }, chapAt[i + 1] - 0.4);
     });
-    kk.to(".kk__shade", { opacity: 1, duration: 1.6 }, 4.2)
-      .to(".kk__frame img", { xPercent: () => (isMobile() ? 0 : 8), duration: 2, ease: "power1.inOut" }, 4.2)
-      .fromTo(".kk__info > *", { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 1.2, stagger: 0.25, ease: "power2.out" }, 4.8)
-      .fromTo(".pcard--1", { yPercent: 140, rotate: 14, opacity: 0 }, { yPercent: 0, rotate: -5, opacity: 1, duration: 1.8, ease: "power3.out" }, 6.6)
-      .fromTo(".pcard--2", { yPercent: 160, rotate: -10, opacity: 0 }, { yPercent: -8, rotate: 5, opacity: 1, duration: 1.8, ease: "power3.out" }, 7)
-      .to({}, { duration: 1.4 });
-    addEventListener("resize", () => { if (kk.scrollTrigger.progress === 0) placeBits(); });
-  }
+    tl.to(chaps[2], { opacity: 0, y: -30, duration: 0.35 }, FILM + 0.05)
+      .to(".kk__steps", { opacity: 0, duration: 0.4 }, FILM + 0.05)
+      .to("#kkShade", { opacity: 1, duration: 0.8 }, FILM + 0.1)
+      .to("#kkCanvas", { xPercent: () => (isMobile() ? 0 : 16), duration: 1.2, ease: "power2.inOut" }, FILM + 0.1)
+      .fromTo(".kk__info > *", { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, stagger: 0.15, ease: "power2.out" }, FILM + 0.3)
+      .fromTo(".pcard--1", { yPercent: 140, rotate: 14, opacity: 0 }, { yPercent: 0, rotate: -5, opacity: 1, duration: 1.2, ease: "power3.out" }, FILM + 0.8)
+      .fromTo(".pcard--2", { yPercent: 160, rotate: -10, opacity: 0 }, { yPercent: -8, rotate: 5, opacity: 1, duration: 1.2, ease: "power3.out" }, FILM + 1.0)
+      .to({}, { duration: 0.8 });
+    gsap.from("#kkIntro > *", { y: 50, opacity: 0, duration: 1.1, stagger: 0.1, ease: "expo.out", scrollTrigger: { trigger: ".kk", start: "top 70%" } });
+  })();
 
   /* ---------------- SIGNATURE 2: ICE CREAM (pinned horizontal) ---------------- */
   const icSection = $(".ic"), icTrack = $("#icTrack"), icBar = $("#icBar");
@@ -269,8 +287,36 @@
         anticipatePin: 1, invalidateOnRefresh: true,
         onRefresh: measureStops,
         onUpdate: (s) => { icBar.style.transform = `scaleX(${s.progress})`; paintIc(s.progress); },
+        snap: matchMedia("(pointer: coarse)").matches ? {
+          snapTo: (v, self) => { const d = self.direction; const c = stopFracs.filter((f) => (d > 0 ? f >= v - 0.02 : f <= v + 0.02)); return c.length ? (d > 0 ? Math.min(...c) : Math.max(...c)) : gsap.utils.snap(stopFracs, v); },
+          duration: { min: 0.35, max: 0.8 }, delay: 0.04, ease: "power2.inOut",
+        } : false,
       },
     });
+    /* one wheel gesture = one flavour (desktop); swipe snaps on touch */
+    if (lenis) {
+      let busy = false, lastWheel = 0;
+      const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+      addEventListener("wheel", (e) => {
+        const st = icTween.scrollTrigger; if (!st) return;
+        const y = lenis.scroll, dir = Math.sign(e.deltaY);
+        if (!dir || y < st.start - 4 || y > st.end + 4) return;
+        const ys = stopFracs.map((f) => st.start + f * (st.end - st.start));
+        let next = -1;
+        if (dir > 0) next = ys.findIndex((v) => v > y + 6);
+        else for (let i = ys.length - 1; i >= 0; i--) if (ys[i] < y - 6) { next = i; break; }
+        if (next === -1) return;               // at the first/last flavour: let the page continue
+        e.preventDefault(); e.stopImmediatePropagation();
+        lastWheel = performance.now();
+        if (busy) return;
+        busy = true;
+        lenis.scrollTo(ys[next], { duration: 1.15, easing: ease, lock: true, force: true, onComplete: () => {
+          const release = () => (performance.now() - lastWheel > 240 ? (busy = false) : setTimeout(release, 60));
+          release();
+        } });
+      }, { passive: false, capture: true });
+    }
+
     slides.forEach((s) => {
       const img = $(".ic__img img", s), name = $(".ic__name", s), box = $(".ic__img", s), txt = $(".ic__txt", s);
       gsap.fromTo(name, { xPercent: 30 }, { xPercent: -30, ease: "none", scrollTrigger: { trigger: s, containerAnimation: icTween, start: "left right", end: "right left", scrub: true } });
@@ -284,107 +330,6 @@
     ScrollTrigger.create({ trigger: "#icPin", start: "top 70%", once: true, onEnter: () => countUp($(".ic__count b")) });
     gsap.from(".ic__intro > *", { y: 60, opacity: 0, stagger: 0.08, duration: 1.1, ease: "expo.out", scrollTrigger: { trigger: ".ic", start: "top 65%" } });
   }
-
-  /* ---------------- SIGNATURE 3: BUILD YOUR CUP (scooper fills the cup on scroll) ---------------- */
-  (() => {
-    const stage = $("#bcStage"); if (!stage) return;
-    const cupB = $(".bc__cupback", stage), cupF = $(".bc__cupfront", stage), tool = $("#bcTool");
-    const balls = $$(".bc__ball", stage), tags = $$(".bc__tag", stage), dots = $$(".bc__splash i", stage);
-    const words = $$(".bc__word"), steps = $$(".bc__step"), bg = $("#bcBg");
-    const cols = ["#F07AA6", "#6B3B22", "#E8B96A"];
-    const bgs = [["#FFF0F6", "#FFD9E8"], ["#FFE6EF", "#F7B3CB"], ["#F8EAE0", "#D9AE93"], ["#FFF6E6", "#F2D49C"], ["#FF7DBE", "#DC2281"]];
-    const bgp = { c1: bgs[0][0], c2: bgs[0][1] };
-    const paintBg = () => (bg.style.background = `radial-gradient(70% 70% at 50% 60%,#FFFFFF 0%,${bgp.c1} 45%,${bgp.c2} 100%)`);
-    paintBg();
-    // geometry (px, measured from the stage bottom)
-    const G = { W: 0, D: [], B: [], lift: 0, T: 0 };
-    const place = () => {
-      const W = stage.offsetWidth, cupH = W * (1094 / 1060);
-      const rimLine = cupH * (1 - 0.205);
-      G.W = W; G.D = [W * 0.8, W * 0.74, W * 0.69];
-      G.B = [];
-      G.B[0] = rimLine - G.D[0] * 0.44;
-      G.B[1] = G.B[0] + G.D[0] * 0.6;
-      G.B[2] = G.B[1] + G.D[1] * 0.6;
-      balls.forEach((b, i) => { b.style.width = G.D[i] + "px"; b.style.marginLeft = -G.D[i] / 2 + "px"; b.style.bottom = G.B[i] + "px"; });
-      tags.forEach((t, i) => (t.style.bottom = (G.B[i] + G.D[i] * 0.42) + "px"));
-      G.lift = W * 0.42;
-      G.T = G.D[0] * 0.8 / 0.21;              // scooper width so its bowl cradles the scoop
-      tool.style.width = G.T + "px";
-      tool.style.left = (W / 2 - G.T * 0.115) + "px";
-      gsap.set(tool, { transformOrigin: "11.5% 40%" });   // bowl centre over the cup
-    };
-    place();
-    if (reduce) { gsap.set(tags, { opacity: 1 }); return; }
-
-    const toolH = () => G.T * (257 / 900);
-    const toolBottom = (i) => G.B[i] + G.lift - toolH() * 0.1; // ball sits in the bowl
-    const tl = gsap.timeline({
-      defaults: { ease: "none" },
-      scrollTrigger: {
-        trigger: "#bcPin", start: "top top", end: () => "+=" + innerHeight * (isMobile() ? 4 : 4.6),
-        pin: true, scrub: true, anticipatePin: 1, invalidateOnRefresh: true,
-        onRefreshInit: place,
-        onUpdate: () => {
-          const t = tl.time(), idx = t < 3.0 ? 0 : t < 5.6 ? 1 : t < 8.2 ? 2 : 3;
-          steps.forEach((s, i) => { s.classList.toggle("is-on", i === idx && t > 0.3); s.classList.toggle("is-done", i < idx); });
-        },
-      },
-    });
-    const offX = () => innerWidth * 0.75;
-    const drop = (i, at) => {
-      const b = balls[i], below = [cupB, cupF, ...balls.slice(0, i)];
-      tl.set(tool, { bottom: () => toolBottom(i) + "px" }, at)
-        .set(b, { zIndex: 8 }, at)
-        .set(b, { zIndex: i + 2 }, at + 1.5)
-        // 1. scooper carries the scoop in from the right
-        .fromTo(tool, { x: offX, y: () => -innerHeight * 0.12, rotate: 14, opacity: 1 },
-          { x: 0, y: 0, rotate: 0, duration: 0.9, ease: "power3.out" }, at)
-        .fromTo(b, { x: offX, y: () => -innerHeight * 0.12 - G.lift, rotate: 14, scaleX: 1, scaleY: 1 },
-          { x: 0, y: () => -G.lift, rotate: 0, duration: 0.9, ease: "power3.out" }, at)
-        // small hover settle
-        .to([tool, b], { y: "-=8", duration: 0.25, ease: "sine.inOut" }, at + 0.9)
-        // 2. scooper tilts and releases
-        .to(tool, { rotate: -62, duration: 0.45, ease: "power2.inOut" }, at + 1.15)
-        .to(b, { rotate: -18, x: () => -G.W * 0.04, duration: 0.25, ease: "power1.in" }, at + 1.25)
-        .to(b, { y: 0, x: 0, rotate: 0, duration: 0.45, ease: "power2.in" }, at + 1.45)
-        // 3. scooper leaves
-        .to(tool, { x: () => offX() * 1.4, y: () => -innerHeight * 0.45, rotate: 10, duration: 0.8, ease: "power2.in" }, at + 1.6)
-        .to(tool, { opacity: 0, duration: 0.15 }, at + 2.3)
-        // 4. landing squash + cup bump
-        .to(b, { scaleY: 0.84, scaleX: 1.1, duration: 0.14, ease: "power1.out" }, at + 1.9)
-        .to(b, { scaleY: 1, scaleX: 1, duration: 0.6, ease: "elastic.out(1,0.35)" }, at + 2.04)
-        .to(below, { y: 8, duration: 0.12, ease: "power1.out" }, at + 1.9)
-        .to(below, { y: 0, duration: 0.55, ease: "elastic.out(1,0.4)" }, at + 2.02)
-        .to(bgp, { c1: bgs[i + 1][0], c2: bgs[i + 1][1], duration: 1.4, ease: "power1.inOut", onUpdate: paintBg }, at + 0.4)
-        .to(words[i], { yPercent: -18, opacity: 0, duration: 0.8, ease: "power2.in" }, at + 0.2)
-        .fromTo(words[i + 1], { yPercent: 18, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.9, ease: "power2.out" }, at + 0.9)
-        .fromTo(tags[i], { opacity: 0, x: 20, scale: 0.8 }, { opacity: 1, x: 0, scale: 1, duration: 0.5, ease: "back.out(2)" }, at + 2.1)
-        .set(dots, { bottom: () => G.B[i] + G.D[i] * 0.15 + "px", backgroundColor: cols[i] }, at + 1.88);
-      dots.forEach((d, k) => {
-        const ang = (Math.PI * (k + 0.5)) / dots.length, r = 60 + (k % 3) * 30;
-        tl.fromTo(d, { x: 0, y: 0, scale: 0.4, opacity: 0 },
-          { x: Math.cos(ang) * -r * 1.5, y: -Math.sin(ang) * r, scale: 1, opacity: 1, duration: 0.3, ease: "power2.out", immediateRender: false }, at + 1.9)
-          .to(d, { y: "+=40", opacity: 0, scale: 0.3, duration: 0.45, ease: "power1.in" }, at + 2.2);
-      });
-    };
-    gsap.set(balls, { x: () => innerWidth * 0.75 });
-    tl.from(".bc__cupback, .bc__cupfront, .bc__shadow", { y: 40, duration: 0.5, ease: "power2.out" }, 0);
-    drop(0, 0.4); drop(1, 3.0); drop(2, 5.6);
-    tl.to(tags, { opacity: 0, scale: 0.8, duration: 0.5, stagger: 0.05 }, 8.3)
-      .fromTo(".tp", { opacity: 0, scale: 0.2, y: 120, rotate: -30 }, { opacity: 1, scale: 1, y: 0, rotate: 0, duration: 1, stagger: 0.12, ease: "back.out(1.6)" }, 8.4)
-      .to(bgp, { c1: bgs[4][0], c2: bgs[4][1], duration: 1.2, onUpdate: paintBg }, 8.5)
-      .to(words[3], { yPercent: -18, opacity: 0, duration: 0.6 }, 8.5)
-      .fromTo(words[4], { yPercent: 18, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.8, ease: "power2.out" }, 8.9)
-      .set(words[4], { webkitTextStroke: "2px rgba(255,255,255,.35)" }, 8.9)
-      .to(".bc__head", { opacity: () => (isMobile() ? 0 : 1), color: "#fff", duration: 0.8 }, 8.7)
-      .to(".bc__head .eyebrow, .bc__head h2 em", { color: "#FFE07A", duration: 0.8 }, 8.7)
-      .to(".bc__steps", { opacity: 0, x: 30, duration: 0.6 }, 9.1)
-      .to(".bc__stage", { scale: 1.05, rotate: -2, duration: 1.2, ease: "power2.out" }, 9.1)
-      .fromTo(".bc__done", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.9, ease: "power2.out" }, 9.5)
-      .to({}, { duration: 1 });
-    addEventListener("load", () => { place(); ScrollTrigger.refresh(); });
-  })();
 
   /* ---------------- Count-up ---------------- */
   function countUp(el) {
